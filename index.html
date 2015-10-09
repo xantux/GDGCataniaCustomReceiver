@@ -25,7 +25,7 @@
             </tr>
 
             <tr ng-repeat="row in game.board">
-              <td>{{indexToChar($index)}}</td>
+              <td>{{$index | indexAsLetter:true}}</td>
               <td ng-repeat="cell in row" id="item_{{$parent.$index}}_{{$index}}" ng-click="game.flipCell(cell)">
 
               

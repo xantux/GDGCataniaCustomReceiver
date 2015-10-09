@@ -20,10 +20,6 @@ memoryGameApp.controller('GameCtrl', ['$scope', 'game', 'ChromeCastReceiver', 'n
     $scope.X = 0;
     $scope.Y = 0;
 
-    $scope.indexToChar = function(i) {
-        return String.fromCharCode(i+65);
-    };
-
 
     $scope.callback = function(data){
           
@@ -46,4 +42,12 @@ memoryGameApp.controller('GameCtrl', ['$scope', 'game', 'ChromeCastReceiver', 'n
     ChromeCastReceiver.initialize('urn:x-cast:com.google.cast.sample.helloworld',
                             $scope.callback);
 
- }]);
+ }]).filter('indexAsLetter', function(){
+        return function(value, uppercase) {
+            if (angular.isNumber(value) && value >= 0 && value <= 25) {
+              return uppercase ? String.fromCharCode(value+65) : String.fromCharCode(value+97);
+            }
+
+            return value;
+          } 
+      });
